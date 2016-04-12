@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<title>Configure Database</title>
+		<script src="jquery-2.1.4.min.js"></script>
+		<script src="sw_utils.js"></script>
+		<script src="getSchema.js"></script>
+		<style>
+			label 
+			{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<label for="host">Server</label>
+			<input name="host" id="host" value="localhost">
+			<label for="database">Database name</label>
+			<input name="database" id="database" value="taxi">
+			<label for="user">User</label>
+			<input name="user" id="user" value="root">
+			<label for="password">password</label>
+			<input name="password" type="password" id="password" value="shuttleRocks1">
+			<input type="submit" value="Generate Fields" id="submitButton">
+			<hr>
+			<select id="formId"><option>Select a Form</option></select>
+			<br>
+			<input type="submit" value="Generate Forms" id="generateForm">
+		</div>
+		<div>
+			<label for="">Load From JSON string<label>
+			<textarea id="textareajson"></textarea>
+			<input type="button" value="Generate Fields" id="textAreaGenerate">
+		</div>
+
+		<div id="fieldsd"></div>
+		<div id="generateButtonContainer">
+			<input type="checkbox" id="addComments" value="1"> Generate Comments <br>
+			<input type="button" id="generateJSON" value="Generate JSON">
+		</div>
+	</body>
+</html>
