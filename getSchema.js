@@ -3,6 +3,7 @@ window.addEventListener('load',function(e)
 	sw_id('textareajson').addEventListener('change',function(e)
 	{
 		var commonStructure= JSON.parse( sw_id('textareajson').value );
+
 		var s = '<option value="">Select an option</option>';
 		for( var i in commonStructure )
 		{
@@ -17,7 +18,9 @@ window.addEventListener('load',function(e)
 
 	sw_id('generateJSON').addEventListener('click',function(e)
 	{
-		var obj = getCommonStructureFromForm();
+
+		var obj =  getCommonStructureFromForm();
+
 		sw_id('textareajson').value =  JSON.stringify( obj );
 		sw_id('generateButtonContainer').style = '';
 	});
@@ -261,7 +264,8 @@ function getCommonStructureFromForm()
 		if( sw_id('addComments').checked )
 			tables[tableName][fieldName].comment = getFlagsArrayValues( tables[tableName][fieldName].flags );
 	}
-	return tables;
+
+	return sortTablesObj( tables );
 }
 
 function getFlagsArrayValues(flag )
@@ -441,5 +445,37 @@ function getTypeSelect(tableName,fieldName,field_type,values)
 		+	'<label><input '+dataAttr+' type="checkbox" value="TRIM_ON_SAVE" '+trimOnSave+'>TRIM_ON_SAVE</label>'
 		+	'<label><input '+dataAttr+' type="checkbox" value="INSERT_EMPTY_DEFAULT" '+insertEmptyDefault+'>INSERT_EMPTY_DEFAULT</label>'
 		+	'<label>Enum Values<br><input '+dataAttr+' type="text" value="'+values+'"></label>'
+}
+
+function sortTablesObj(obj)
+{
+	var newObj	= {};
+	var keys	= Object.keys( obj ).sort();
+
+	for(var i=0;i<keys.length;i++)
+	{
+		var table	= obj[keys[i]];
+		var tKeys	= Object.keys( table ).sort(function(a,b)
+		{
+			if( a.length == b.length )
+			{
+				if( a == b.length )
+					return 0;
+				return a < b ? -1 : 1;
+			}
+
+			return a.length < b.length ? -1 : 1;
+		});
+
+		var newTable = {};
+		for(var j=0;j<tKeys.length;j++)
+		{
+			newTable[ tKeys[ j ] ] = table[ tKeys[j] ];
+		}
+
+		newObj[ keys[ i ] ] = newTable;
+	}
+
+	return newObj;
 }
 

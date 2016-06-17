@@ -15,7 +15,7 @@
 		$fields_res = $mysqli->query( 'describe `'.$mysqli->real_escape_string( $table_name ).'`');
 		$fields		= array();
 
-		while( $fields_rows = $fields_res->fetch_assoc() )
+		while( $fields_rows = $fields_res->fetch_object() )
 		{
 			$fields[] = $fields_rows;
 		}
