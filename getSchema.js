@@ -95,7 +95,7 @@ function generateForm()
 {
 	var s = '';
 	var formName = sw_id('formId').value;
-	if( formName == '' )
+	if( formName === '' )
 	{
 		alert('Select an option');
 		return;
@@ -225,6 +225,7 @@ var flags =
 	,DONT_EXPORT_EXTERNAL	: 131072
 	,TIME_VALUE				: 262144
 	,INSERT_EMPTY_DEFAULT	: 524288
+	,DATE_VALUE            	: 1048576
 	//,DISCOUNTINUED			: 131072
 	//,IS_SENSITIVE_DATA		: 131072
 	,REQUIRED_ON_SAVE		: 6144
@@ -318,6 +319,11 @@ function toCommonStructure( schema )
 			regex	: /^decimal/
 			,type	: 'FLOAT_VALUE'
 		}
+		,'date'		:
+		{
+			regex	: /^date/
+			,type	: 'DATE_VALUE'
+		}
 		,'int'		:
 		{
 			regex	: /^int/
@@ -384,6 +390,7 @@ function getTypeSelect(tableName,fieldName,field_type,values)
 		,'CREDIT_CARD_VALUE'
 		,'DIGITS_VALUE'
 		,'TIME_VALUE'
+		,'DATE_VALUE'
 		,'DISCOUNTINUED'
 	];
 
